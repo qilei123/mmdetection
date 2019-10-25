@@ -106,7 +106,7 @@ class BaseDetector(nn.Module):
             bbox_result, segm_result = result
         else:
             bbox_result, segm_result = result, None
-        print(result)
+        print(bbox_result)
         img_tensor = data['img'][0]
         img_metas = data['img_meta'][0].data[0]
         imgs = tensor2imgs(img_tensor, **img_metas[0]['img_norm_cfg'])
