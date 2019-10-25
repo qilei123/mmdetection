@@ -105,14 +105,6 @@ class LoadAnnotations(object):
             results['gt_semantic_seg'] = results['ann_info']['seg']
         return results
     
-    def _load_semantic_seg_with_mask(self, results):
-        if os.path.exists(osp.join(results['seg_prefix'], results['ann_info']['seg_map'])):
-            results['gt_semantic_seg'] = mmcv.imread(
-                osp.join(results['seg_prefix'], results['ann_info']['seg_map']),
-                flag='unchanged').squeeze()
-        else:
-            results['gt_semantic_seg'] = results['ann_info']['seg']
-        return results
     def __call__(self, results):
         if self.with_bbox:
             results = self._load_bboxes(results)

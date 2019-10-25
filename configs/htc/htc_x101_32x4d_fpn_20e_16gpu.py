@@ -197,7 +197,7 @@ test_cfg = dict(
     keep_all_stages=False)
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = 'data/coco/'
+data_root = '/data0/qilei_chen/COCO/coco2017/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -236,7 +236,7 @@ data = dict(
         type=dataset_type,
         ann_file=data_root + 'annotations/instances_train2017.json',
         img_prefix=data_root + 'train2017/',
-        seg_prefix=data_root + 'stuffthingmaps/train2017/',
+        seg_prefix=data_root + 'stuff_train2017_pixelmaps/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
