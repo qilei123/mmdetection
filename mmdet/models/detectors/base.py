@@ -101,12 +101,12 @@ class BaseDetector(nn.Module):
         else:
             return self.forward_test(img, img_meta, **kwargs)
 
-    def show_result(self, data, result, dataset=None, score_thr=0.1):
+    def show_result(self, data, result, dataset=None, score_thr=0.3):
         if isinstance(result, tuple):
             bbox_result, segm_result = result
         else:
             bbox_result, segm_result = result, None
-        print(bbox_result)
+        #print(bbox_result)
         img_tensor = data['img'][0]
         img_metas = data['img_meta'][0].data[0]
         imgs = tensor2imgs(img_tensor, **img_metas[0]['img_norm_cfg'])
