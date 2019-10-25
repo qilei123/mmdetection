@@ -16,7 +16,7 @@ from mmdet.datasets import build_dataloader, build_dataset
 from mmdet.models import build_detector
 
 
-def single_gpu_test(model, data_loader, show=False):
+def single_gpu_test(model, data_loader, show=False,save_folder = ""):
     model.eval()
     results = []
     dataset = data_loader.dataset
@@ -26,7 +26,7 @@ def single_gpu_test(model, data_loader, show=False):
             result = model(return_loss=False, rescale=not show, **data)
         results.append(result)
         filename = os.path.basename((data["img_meta"][0]).data[0][0]["filename"])
-        out_file = os.path.join("/data0/qilei_chen/Development/mmdetection_show",filename)
+        out_file = os.path.join(save_folder,filename)
         if show:
             model.module.show_result(data, result,dataset=["line","ridge1","ridge2"],out_file=out_file)
 
@@ -118,6 +118,7 @@ def parse_args():
         help='eval types')
     parser.add_argument('--show', action='store_true', help='show results')
     parser.add_argument('--tmpdir', help='tmp dir for writing some results')
+    parser.add_argument('--savedir', help='save dir for results images')
     parser.add_argument(
         '--launcher',
         choices=['none', 'pytorch', 'slurm', 'mpi'],
@@ -179,10 +180,10 @@ def main():
         model.CLASSES = checkpoint['meta']['CLASSES']
     else:
         model.CLASSES = dataset.CLASSES
-
+    save_folder = args.savedir
     if not distributed:
         model = MMDataParallel(model, device_ids=[0])
-        outputs = single_gpu_test(model, data_loader, args.show)
+        outputs = single_gpu_test(model, data_loader, args.show,save_folder = save_folder)
     else:
         model = MMDistributedDataParallel(model.cuda())
         outputs = multi_gpu_test(model, data_loader, args.tmpdir)
