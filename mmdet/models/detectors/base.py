@@ -101,7 +101,7 @@ class BaseDetector(nn.Module):
         else:
             return self.forward_test(img, img_meta, **kwargs)
 
-    def show_result(self, data, result, dataset=None, score_thr=0.3):
+    def show_result(self, data, result, dataset=None, score_thr=0.1):
         if isinstance(result, tuple):
             bbox_result, segm_result = result
         else:
