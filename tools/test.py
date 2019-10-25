@@ -26,7 +26,7 @@ def single_gpu_test(model, data_loader, show=False):
             result = model(return_loss=False, rescale=not show, **data)
         results.append(result)
         filename = os.path.basename((data["img_meta"][0]).data[0][0]["filename"])
-        out_file = os.path.join("/data0/qilei_chen/Development/mmdetection_show",filename)
+        out_file = os.path.join("/data0/qilei_chen/Development/mmdetection_show_2",filename)
         if show:
             model.module.show_result(data, result,dataset=["line","ridge1","ridge2"],out_file=out_file)
 
