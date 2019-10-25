@@ -241,13 +241,13 @@ data = dict(
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/ridge_in_three_instances_train2014.json',
-        img_prefix=data_root + 'train2014/',
+        ann_file=data_root + 'annotations/ridge_in_three_instances_val2014.json',
+        img_prefix=data_root + 'val2014/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/ridge_in_three_instances_train2014.json',
-        img_prefix=data_root + 'train2014/',
+        ann_file=data_root + 'annotations/ridge_in_three_instances_val2014.json',
+        img_prefix=data_root + 'val2014/',
         pipeline=test_pipeline))
 # optimizer
 learn_rate = 0.02/16*2
