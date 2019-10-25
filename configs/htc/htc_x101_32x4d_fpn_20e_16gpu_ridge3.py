@@ -103,7 +103,7 @@ model = dict(
         num_convs=4,
         in_channels=256,
         conv_out_channels=256,
-        num_classes=(n_classes-1)*50+1,
+        num_classes=4,#(n_classes-1)*50+1,
         ignore_label=255,
         loss_weight=0.2))
 # model training and testing settings
@@ -273,7 +273,7 @@ log_config = dict(
 total_epochs = 50
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = './work_dirs/htc_x101_32x4d_fpn_20e_ridge3_2'
+work_dir = './work_dirs/htc_x101_32x4d_fpn_20e_ridge3'
 load_from = None
-resume_from = None
+resume_from = './work_dirs/htc_x101_32x4d_fpn_20e_ridge3/epoch_8.pth'#None
 workflow = [('train', 1)]
