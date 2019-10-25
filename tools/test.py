@@ -28,7 +28,7 @@ def single_gpu_test(model, data_loader, show=False):
         filename = os.path.basename((data["img_meta"][0]).data[0][0]["filename"])
         out_file = os.path.join("/data0/qilei_chen/Development/mmdetection_show",filename)
         if show:
-            model.module.show_result(data, result,dataset=["line","ridge1","ridge2"],out_file="")
+            model.module.show_result(data, result,dataset=["line","ridge1","ridge2"],out_file=out_file)
 
         batch_size = data['img'][0].size(0)
         for _ in range(batch_size):
