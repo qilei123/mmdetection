@@ -222,7 +222,7 @@ test_pipeline = [
         img_scale=(1333, 800),
         flip=False,
         transforms=[
-            dict(type='Resize', keep_ratio=True),
+            dict(type='Resize', keep_ratio=False),
             dict(type='RandomFlip', flip_ratio=0.5),
             dict(type='Normalize', **img_norm_cfg),
             dict(type='Pad', size_divisor=32),
