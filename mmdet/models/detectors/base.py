@@ -144,6 +144,7 @@ class BaseDetector(nn.Module):
             ]
             
             labels = np.concatenate(labels)
+            print(out_file)
             if out_file=="":
                 mmcv.imshow_det_bboxes(
                     img_show,
