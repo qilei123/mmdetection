@@ -106,7 +106,7 @@ class BaseDetector(nn.Module):
             bbox_result, segm_result = result
         else:
             bbox_result, segm_result = result, None
-
+        print(result)
         img_tensor = data['img'][0]
         img_metas = data['img_meta'][0].data[0]
         imgs = tensor2imgs(img_tensor, **img_metas[0]['img_norm_cfg'])
@@ -142,6 +142,7 @@ class BaseDetector(nn.Module):
                 np.full(bbox.shape[0], i, dtype=np.int32)
                 for i, bbox in enumerate(bbox_result)
             ]
+            
             labels = np.concatenate(labels)
             mmcv.imshow_det_bboxes(
                 img_show,
