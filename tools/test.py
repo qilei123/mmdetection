@@ -25,7 +25,8 @@ def single_gpu_test(model, data_loader, show=False):
         with torch.no_grad():
             result = model(return_loss=False, rescale=not show, **data)
         results.append(result)
-        print((data["img_meta"][0]).data)
+        filename = os.path.basename((data["img_meta"][0]).data[0][0]["filename"])
+        out_file = os.path.join("/data0/qilei_chen/Development/mmdetection_show",filename)
         if show:
             model.module.show_result(data, result,dataset=["line","ridge1","ridge2"],out_file="")
 
