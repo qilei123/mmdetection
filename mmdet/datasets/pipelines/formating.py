@@ -126,7 +126,7 @@ class DefaultFormatBundle(object):
         if 'gt_semantic_seg' in results:
             print(results['gt_semantic_seg'].shape)
             results['gt_semantic_seg'] = DC(
-                to_tensor(results['gt_semantic_seg'][:,:,0][None, ...]), stack=True)
+                to_tensor(results['gt_semantic_seg'][None, ...]), stack=True)
         return results
 
     def __repr__(self):
