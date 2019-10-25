@@ -101,10 +101,10 @@ class CocoDataset(CustomDataset):
         seg_map = img_info['filename'].replace('jpg', 'png')
         
         tsegs = self.coco.annToMask(ann_info[0])
-        tsegs[tsegs==1]=ann_info[0]["category_id"]#*50
+        tsegs[tsegs==1]=ann_info[0]["category_id"]*50
         for ann in ann_info[1:]:
             tseg = self.coco.annToMask(ann)
-            tsegs[tseg==1]=ann["category_id"]#*50
+            tsegs[tseg==1]=ann["category_id"]*50
 
         ann = dict(
             bboxes=gt_bboxes,
