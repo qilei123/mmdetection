@@ -103,7 +103,7 @@ model = dict(
         num_convs=4,
         in_channels=256,
         conv_out_channels=256,
-        num_classes=4(n_classes-1)*50+1,
+        num_classes=151,#n_classes,
         ignore_label=255,
         loss_weight=0.2))
 # model training and testing settings
