@@ -103,7 +103,7 @@ model = dict(
         num_convs=4,
         in_channels=256,
         conv_out_channels=256,
-        num_classes=183,
+        num_classes=n_classes,
         ignore_label=255,
         loss_weight=0.2))
 # model training and testing settings
@@ -237,7 +237,7 @@ data = dict(
         type=dataset_type,
         ann_file=data_root + 'annotations/ridge_in_three_instances_train2014.json',
         img_prefix=data_root + 'train2014/',
-        seg_prefix=data_root + 'stuffthingmaps/train2014/',
+        seg_prefix=data_root + 'train2014_seg_ridge3/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,

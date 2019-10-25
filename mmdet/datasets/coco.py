@@ -99,12 +99,19 @@ class CocoDataset(CustomDataset):
             gt_bboxes_ignore = np.zeros((0, 4), dtype=np.float32)
 
         seg_map = img_info['filename'].replace('jpg', 'png')
+        
+        tsegs = self.coco.annToMask(ann_info[0])
+        tsegs[tsegs==1]=ann_info[0]["category_id"]
+        for ann in ann_info[1:]:
+            tseg = self.coco.annToMask(ann)
+            tsegs[tseg==1]=ann["category_id"]
 
         ann = dict(
             bboxes=gt_bboxes,
             labels=gt_labels,
             bboxes_ignore=gt_bboxes_ignore,
             masks=gt_masks_ann,
-            seg_map=seg_map)
+            seg_map=seg_map,
+            seg = tsegs)
 
         return ann
