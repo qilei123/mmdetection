@@ -122,7 +122,7 @@ def det2json(dataset, results):
                 json_results.append(data)
     return json_results
 
-
+score_thrs = 0.3
 def segm2json(dataset, results):
     bbox_json_results = []
     segm_json_results = []
@@ -138,7 +138,8 @@ def segm2json(dataset, results):
                 data['bbox'] = xyxy2xywh(bboxes[i])
                 data['score'] = float(bboxes[i][4])
                 data['category_id'] = dataset.cat_ids[label]
-                bbox_json_results.append(data)
+                if data['score']>=score_thrs:
+                    bbox_json_results.append(data)
 
             # segm results
             # some detectors use different score for det and segm
@@ -156,7 +157,8 @@ def segm2json(dataset, results):
                 if isinstance(segms[i]['counts'], bytes):
                     segms[i]['counts'] = segms[i]['counts'].decode()
                 data['segmentation'] = segms[i]
-                segm_json_results.append(data)
+                if data['score']>=score_thrs:
+                    segm_json_results.append(data)
     return bbox_json_results, segm_json_results
 
 
