@@ -197,11 +197,25 @@ class RandomFlip(object):
         flipped[..., 0::4] = w - bboxes[..., 2::4] - 1
         flipped[..., 2::4] = w - bboxes[..., 0::4] - 1
         return flipped
+    def bbox_flip_v(self, bboxes, img_shape):
+        """Flip bboxes horizontally.
 
+        Args:
+            bboxes(ndarray): shape (..., 4*k)
+            img_shape(tuple): (height, width)
+        """
+        assert bboxes.shape[-1] % 4 == 0
+        h = img_shape[0]
+        flipped = bboxes.copy()
+        flipped[..., 1::4] = h - bboxes[..., 3::4] - 1
+        flipped[..., 3::4] = h - bboxes[..., 1::4] - 1
+        return flipped
     def __call__(self, results):
         if 'flip' not in results:
             flip = True if np.random.rand() < self.flip_ratio else False
-            results['flip'] = flip
+            results['flip'] = flip #for horizontal
+            flip1 = True if np.random.rand() < self.flip_ratio else False
+            results['flip1'] = flip1 #for vertical
         if results['flip']:
             # flip image
             results['img'] = mmcv.imflip(results['img'])
@@ -212,6 +226,16 @@ class RandomFlip(object):
             # flip masks
             for key in results.get('mask_fields', []):
                 results[key] = [mask[:, ::-1] for mask in results[key]]
+        if results['flip1']:
+            # flip image
+            results['img'] = mmcv.imflip(results['img'],direction = 'vertical')
+            # flip bboxes
+            for key in results.get('bbox_fields', []):
+                results[key] = self.bbox_flip_v(results[key],
+                                              results['img_shape'])
+            # flip masks
+            for key in results.get('mask_fields', []):
+                results[key] = [mask[::-1, :] for mask in results[key]]            
         return results
 
     def __repr__(self):
@@ -396,6 +420,8 @@ class SegResizeFlipPadRescale(object):
                 interpolation='nearest')
         if results['flip']:
             gt_seg = mmcv.imflip(gt_seg)
+        if results['flip1']:
+            gt_seg = mmcv.imflip(gt_seg,direction = 'vertical')
         if gt_seg.shape != results['pad_shape']:
             gt_seg = mmcv.impad(gt_seg, results['pad_shape'][:2])
         if self.scale_factor != 1:
