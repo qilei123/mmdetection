@@ -273,7 +273,7 @@ log_config = dict(
 total_epochs = 20
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = './work_dirs/htc_x101_32x4d_fpn_20e'
+work_dir = './work_dirs/htc_x101_32x4d_fpn_20e_ridge3'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]
