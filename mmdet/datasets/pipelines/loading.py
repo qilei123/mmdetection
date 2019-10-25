@@ -1,6 +1,6 @@
 import os.path as osp
 import warnings
-
+import os
 import mmcv
 import numpy as np
 import pycocotools.mask as maskUtils
@@ -104,7 +104,7 @@ class LoadAnnotations(object):
         else:
             results['gt_semantic_seg'] = results['ann_info']['seg']
         return results
-    import os
+    
     def _load_semantic_seg_with_mask(self, results):
         if os.path.exist(osp.join(results['seg_prefix'], results['ann_info']['seg_map'])):
             results['gt_semantic_seg'] = mmcv.imread(
