@@ -122,7 +122,7 @@ def det2json(dataset, results):
                 json_results.append(data)
     return json_results
 
-score_thrs = 0.3
+score_thrs = 0.1
 def segm2json(dataset, results):
     bbox_json_results = []
     segm_json_results = []
