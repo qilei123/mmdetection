@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PYTHON=${PYTHON:-"python3"}
+PYTHON=${PYTHON:-"python"}
 
 CONFIG=$1
 GPUS=$2
