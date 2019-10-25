@@ -97,7 +97,7 @@ class LoadAnnotations(object):
         return results
 
     def _load_semantic_seg(self, results):
-        if os.path.exist(osp.join(results['seg_prefix'], results['ann_info']['seg_map'])):
+        if os.path.exists(osp.join(results['seg_prefix'], results['ann_info']['seg_map'])):
             results['gt_semantic_seg'] = mmcv.imread(
                 osp.join(results['seg_prefix'], results['ann_info']['seg_map']),
                 flag='unchanged').squeeze()
@@ -106,7 +106,7 @@ class LoadAnnotations(object):
         return results
     
     def _load_semantic_seg_with_mask(self, results):
-        if os.path.exist(osp.join(results['seg_prefix'], results['ann_info']['seg_map'])):
+        if os.path.exists(osp.join(results['seg_prefix'], results['ann_info']['seg_map'])):
             results['gt_semantic_seg'] = mmcv.imread(
                 osp.join(results['seg_prefix'], results['ann_info']['seg_map']),
                 flag='unchanged').squeeze()
