@@ -25,6 +25,7 @@ def single_gpu_test(model, data_loader, show=False,save_folder = ""):
         with torch.no_grad():
             result = model(return_loss=False, rescale=not show, **data)
         results.append(result)
+        
         filename = os.path.basename((data["img_meta"][0]).data[0][0]["filename"])
         out_file = os.path.join(save_folder,filename)
         if show:
