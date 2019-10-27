@@ -21,8 +21,8 @@ class MultiScaleFlipAug(object):
             for flip in flip_aug:
                 _results = results.copy()
                 _results['scale'] = scale
-                print(flip)
                 _results['flip'] = flip
+                _results['flip1'] = flip
                 data = self.transforms(_results)
                 aug_data.append(data)
         # list of dict to dict of list
