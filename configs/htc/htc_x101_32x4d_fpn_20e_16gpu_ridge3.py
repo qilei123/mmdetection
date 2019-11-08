@@ -198,7 +198,7 @@ test_cfg = dict(
     keep_all_stages=False)
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = '/data0/qilei_chen/old_alien/AI_EYE_IMGS/ROP_DATASET_with_label/9LESIONS/'
+data_root = '/data1/qilei_chen/DATA/ROP_DATASET/9LESIONS/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -273,7 +273,7 @@ log_config = dict(
 total_epochs = 50
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = './work_dirs/htc_x101_32x4d_fpn_20e_ridge3'
+work_dir = '/data1/qilei_chen/DATA/ROP_DATASET/mmdetection_work_dirs/htc_x101_32x4d_fpn_20e_ridge3'
 load_from = None
-resume_from = './work_dirs/htc_x101_32x4d_fpn_20e_ridge3/epoch_8.pth'#None
+resume_from = None#'/data1/qilei_chen/DATA/ROP_DATASET/mmdetection_work_dirs/htc_x101_32x4d_fpn_20e_ridge3/epoch_8.pth'#None
 workflow = [('train', 1)]
