@@ -270,7 +270,7 @@ log_config = dict(
     ])
 # yapf:enable
 # runtime settings
-total_epochs = 200
+total_epochs = 50
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 work_dir = '/data1/qilei_chen/DATA/ROP_DATASET/mmdetection_work_dirs/htc_x101_32x4d_fpn_20e_ridge1'
