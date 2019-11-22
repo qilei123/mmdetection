@@ -101,7 +101,7 @@ class BaseDetector(nn.Module):
         else:
             return self.forward_test(img, img_meta, **kwargs)
 
-    def show_result(self, data, result, dataset=None, score_thr=0.3,out_file = ""):
+    def show_result(self, data, result, dataset=None, score_thr=0.0,out_file = ""):
         if isinstance(result, tuple):
             bbox_result, segm_result = result
         else:
@@ -129,13 +129,15 @@ class BaseDetector(nn.Module):
 
             bboxes = np.vstack(bbox_result)
             max_score = max(np.where(bboxes[:, -1]))
-            score_thr = max_score-0.01
+            #score_thr = max_score
             # draw segmentation masks
             if segm_result is not None:
                 segms = mmcv.concat_list(segm_result)
                 
-                inds = np.where(bboxes[:, -1] >= score_thr)[0]
-                #inds = np.where(bboxes[:, -1] >= max_score)[0]
+                #inds = np.where(bboxes[:, -1] > score_thr)[0]
+                
+                inds = np.where(bboxes[:, -1] >= max_score)[0]
+                bboxes = bboxes[inds, :]
                 for i in inds:
                     color_mask = np.random.randint(
                         0, 256, (1, 3), dtype=np.uint8)
