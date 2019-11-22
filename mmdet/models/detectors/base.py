@@ -5,7 +5,7 @@ import mmcv
 import numpy as np
 import pycocotools.mask as maskUtils
 import torch.nn as nn
-
+import os
 from mmdet.core import auto_fp16, get_classes, tensor2imgs
 
 
@@ -122,6 +122,9 @@ class BaseDetector(nn.Module):
             raise TypeError(
                 'dataset must be a valid dataset name or a sequence'
                 ' of class names, not {}'.format(type(dataset)))
+        output_folder = out_file.replace(os.path.basename(out_file),"")
+        output_file = os.path.basename(out_file)
+        classify_records = open(os.path.join(output_folder,"classify_records.txt"),'w')
 
         for img, img_meta in zip(imgs, img_metas):
             h, w, _ = img_meta['img_shape']
@@ -154,6 +157,7 @@ class BaseDetector(nn.Module):
             #print(inds)
             #print(max_score)
             labels = labels[inds]
+            classify_records.write(output_file+' '+str(labels[0])+'\n')
             #print(out_file)
             if out_file=="":
                 mmcv.imshow_det_bboxes(
