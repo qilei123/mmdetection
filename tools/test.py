@@ -21,6 +21,10 @@ def single_gpu_test(model, data_loader, show=False,save_folder = ""):
     results = []
     dataset = data_loader.dataset
     prog_bar = mmcv.ProgressBar(len(dataset))
+
+
+    classify_records = open(os.path.join(save_folder,"classify_records.txt"),'w')
+
     for i, data in enumerate(data_loader):
         with torch.no_grad():
             result = model(return_loss=False, rescale= not show, **data)
@@ -28,7 +32,7 @@ def single_gpu_test(model, data_loader, show=False,save_folder = ""):
         if show:
             filename = os.path.basename((data["img_meta"][0]).data[0][0]["filename"])
             out_file = os.path.join(save_folder,filename)
-            model.module.show_result(data, result,dataset=["line","ridge1","ridge2"],out_file=out_file)
+            model.module.show_result(data, result,dataset=["line","ridge1","ridge2"],out_file=out_file,classify_records = classify_records)
 
         batch_size = data['img'][0].size(0)
         for _ in range(batch_size):

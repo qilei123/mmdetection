@@ -101,7 +101,7 @@ class BaseDetector(nn.Module):
         else:
             return self.forward_test(img, img_meta, **kwargs)
 
-    def show_result(self, data, result, dataset=None, score_thr=0.0,out_file = ""):
+    def show_result(self, data, result, dataset=None, score_thr=0.0,out_file = "",classify_records=""):
         if isinstance(result, tuple):
             bbox_result, segm_result = result
         else:
@@ -122,9 +122,7 @@ class BaseDetector(nn.Module):
             raise TypeError(
                 'dataset must be a valid dataset name or a sequence'
                 ' of class names, not {}'.format(type(dataset)))
-        output_folder = out_file.replace(os.path.basename(out_file),"")
-        output_file = os.path.basename(out_file)
-        classify_records = open(os.path.join(output_folder,"classify_records.txt"),'w')
+        
 
         for img, img_meta in zip(imgs, img_metas):
             h, w, _ = img_meta['img_shape']
@@ -157,6 +155,7 @@ class BaseDetector(nn.Module):
             #print(inds)
             #print(max_score)
             labels = labels[inds]
+            output_file = os.path.basename(out_file)
             classify_records.write(output_file+' '+str(labels[0])+'\n')
             #print(out_file)
             '''
