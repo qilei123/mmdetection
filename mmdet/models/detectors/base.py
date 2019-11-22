@@ -152,6 +152,7 @@ class BaseDetector(nn.Module):
             labels = np.concatenate(labels)
             print(labels)
             print(inds)
+            print(max_score)
             labels = labels[inds]
             #print(out_file)
             if out_file=="":
