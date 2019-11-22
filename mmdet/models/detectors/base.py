@@ -159,6 +159,7 @@ class BaseDetector(nn.Module):
             labels = labels[inds]
             classify_records.write(output_file+' '+str(labels[0])+'\n')
             #print(out_file)
+            '''
             if out_file=="":
                 mmcv.imshow_det_bboxes(
                     img_show,
@@ -174,3 +175,4 @@ class BaseDetector(nn.Module):
                     class_names=class_names,
                     score_thr=score_thr,
                     out_file=out_file)
+            '''
