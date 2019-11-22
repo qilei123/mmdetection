@@ -129,7 +129,7 @@ class BaseDetector(nn.Module):
 
             bboxes = np.vstack(bbox_result)
             max_score = max(np.where(bboxes[:, -1]))
-            score_thr = max_score
+            score_thr = max_score-0.00000001
             # draw segmentation masks
             if segm_result is not None:
                 segms = mmcv.concat_list(segm_result)
