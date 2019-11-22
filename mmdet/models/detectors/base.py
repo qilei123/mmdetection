@@ -129,12 +129,12 @@ class BaseDetector(nn.Module):
 
             bboxes = np.vstack(bbox_result)
             max_score = max(np.where(bboxes[:, -1]))
-            score_thr = max_score-0.00001
+            score_thr = max_score-0.001
             # draw segmentation masks
             if segm_result is not None:
                 segms = mmcv.concat_list(segm_result)
                 
-                inds = np.where(bboxes[:, -1] > score_thr)[0]
+                inds = np.where(bboxes[:, -1] >= score_thr)[0]
                 #inds = np.where(bboxes[:, -1] >= max_score)[0]
                 for i in inds:
                     color_mask = np.random.randint(
