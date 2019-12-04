@@ -101,7 +101,7 @@ class CustomDataset(Dataset):
         """Filter images too small."""
         valid_inds = []
         for i, img_info in enumerate(self.img_infos):
-            if min(img_info['width'], img_info['height']) >= min_size:
+            if min(int(img_info['width']), int(img_info['height'])) >= min_size:
                 valid_inds.append(i)
         return valid_inds
 
@@ -114,7 +114,7 @@ class CustomDataset(Dataset):
         self.flag = np.zeros(len(self), dtype=np.uint8)
         for i in range(len(self)):
             img_info = self.img_infos[i]
-            if img_info['width'] / img_info['height'] > 1:
+            if int(img_info['width']) / int(img_info['height']) > 1:
                 self.flag[i] = 1
 
     def _rand_another(self, idx):
