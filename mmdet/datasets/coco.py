@@ -51,7 +51,7 @@ class CocoDataset(CustomDataset):
         for i, img_info in enumerate(self.img_infos):
             if self.img_ids[i] not in ids_with_ann:
                 continue
-            if min(img_info['width'], img_info['height']) >= min_size:
+            if min(int(img_info['width']), int(img_info['height'])) >= min_size:
                 valid_inds.append(i)
         return valid_inds
 
