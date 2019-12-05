@@ -11,8 +11,7 @@ from mmdet.core.evaluation.bbox_overlaps import bbox_overlaps
 from ..registry import PIPELINES
 
 
-FLIP2 = True
-ROTATE4 = True
+
 
 @PIPELINES.register_module
 class Resize(object):
@@ -182,8 +181,11 @@ class RandomFlip(object):
         flip_ratio (float, optional): The flipping probability.
     """
 
-    def __init__(self, flip_ratio=None):
+    def __init__(self, flip_ratio=None, FLIP2 = False,ROTATE4 = False):
+
         self.flip_ratio = flip_ratio
+        self.FLIP2 = FLIP2
+        self.ROTATE4 = ROTATE4
         if flip_ratio is not None:
             assert flip_ratio >= 0 and flip_ratio <= 1
 
@@ -265,7 +267,7 @@ class RandomFlip(object):
             # flip masks
             for key in results.get('mask_fields', []):
                 results[key] = [mask[:, ::-1] for mask in results[key]]
-        if results['flip1'] and FLIP2:
+        if results['flip1'] and self.FLIP2:
             # flip image
             results['img'] = mmcv.imflip(results['img'],direction = 'vertical')
             # flip bboxes
@@ -275,7 +277,7 @@ class RandomFlip(object):
             # flip masks
             for key in results.get('mask_fields', []):
                 results[key] = [mask[::-1, :] for mask in results[key]] 
-        if ROTATE4:
+        if self.ROTATE4:
             rotate_possibility = np.random.rand()
             if  rotate_possibility <= 0.25:
                 rotate = 0
