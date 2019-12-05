@@ -1,5 +1,5 @@
 # model settings
-input_size = 512
+input_size = 1024
 model = dict(
     type='SingleStageDetector',
     pretrained='open-mmlab://vgg16_caffe',
@@ -65,7 +65,7 @@ train_pipeline = [
         type='MinIoURandomCrop',
         min_ious=(0.1, 0.3, 0.5, 0.7, 0.9),
         min_crop_size=0.3),
-    dict(type='Resize', img_scale=(512, 512), keep_ratio=False),
+    dict(type='Resize', img_scale=(input_size, input_size), keep_ratio=False),
     dict(type='Normalize', **img_norm_cfg),
     dict(type='RandomFlip', flip_ratio=0.5),
     dict(type='DefaultFormatBundle'),
@@ -75,7 +75,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(512, 512),
+        img_scale=(input_size, input_size),
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=False),
