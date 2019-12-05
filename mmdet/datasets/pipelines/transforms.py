@@ -11,8 +11,8 @@ from mmdet.core.evaluation.bbox_overlaps import bbox_overlaps
 from ..registry import PIPELINES
 
 
-FLIP2 = True
-ROTATE4 = True
+FLIP2 = False
+ROTATE4 = False
 
 @PIPELINES.register_module
 class Resize(object):
