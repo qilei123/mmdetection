@@ -18,9 +18,9 @@ model = dict(
         input_size=input_size,
         in_channels=(512, 1024, 512, 256, 256, 256, 256),
         num_classes=2,
-        anchor_strides=(8, 16, 32, 64, 128, 256, 512),
+        anchor_strides=(2, 4, 8, 16, 32, 64, 128),
         basesize_ratio_range=(0.1, 0.9),
-        anchor_ratios=([2], [2, 3], [2, 3], [2, 3], [2, 3], [2], [2]),
+        anchor_ratios=([1], [1], [1], [1], [1], [1], [1]),
         target_means=(.0, .0, .0, .0),
         target_stds=(0.1, 0.1, 0.2, 0.2)))
 cudnn_benchmark = True
@@ -106,7 +106,7 @@ data = dict(
         img_prefix=data_root + 'val2014/',
         pipeline=test_pipeline))
 # optimizer
-optimizer = dict(type='SGD', lr=0.00025, momentum=0.9, weight_decay=5e-4)
+optimizer = dict(type='SGD', lr=0.002, momentum=0.9, weight_decay=5e-4)
 optimizer_config = dict()
 # learning policy
 lr_config = dict(
