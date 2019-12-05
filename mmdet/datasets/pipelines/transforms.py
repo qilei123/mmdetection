@@ -297,9 +297,9 @@ class RandomFlip(object):
                 for key in results.get('mask_fields', []):
                     results[key] = [mask[:, ::-1] for mask in results[key]]
                 '''
-                temp = results['img_shape'][0]
-                results['img_shape'][0] = results['img_shape'][1]
-                results['img_shape'][1] = temp
+                #temp = results['img_shape'][0]
+                #results['img_shape'][0] = results['img_shape'][1]
+                #results['img_shape'][1] = temp
             elif rotate==2:
                 # rotate image
                 results['img'] = mmcv.imrotate(results['img'],180)
@@ -314,9 +314,9 @@ class RandomFlip(object):
                 for key in results.get('bbox_fields', []):
                     results[key] = self.bbox_rotate270(results[key],
                                                 results['img_shape'])  
-                temp = results['img_shape'][0]
-                results['img_shape'][0] = results['img_shape'][1]
-                results['img_shape'][1] = temp                                    
+                #temp = results['img_shape'][0]
+                #results['img_shape'][0] = results['img_shape'][1]
+                #results['img_shape'][1] = temp                                    
         return results
 
     def __repr__(self):
