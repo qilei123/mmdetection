@@ -167,7 +167,7 @@ log_config = dict(
     ])
 # yapf:enable
 # runtime settings
-total_epochs = 50
+total_epochs = 100
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 work_dir = data_root+'work_dirs/faster_rcnn_x101_32x4d_fpn_1x_coco_volcanoes_aug'
