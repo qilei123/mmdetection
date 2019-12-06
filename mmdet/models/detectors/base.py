@@ -178,7 +178,7 @@ class BaseDetector(nn.Module):
                     score_thr=score_thr,
                     out_file=out_file)
             
-    def show_result(self, data, result, dataset=None, score_thr=0.3):
+    def show_result(self, data, result, dataset=None, score_thr=0.3,out_file=""):
         if isinstance(result, tuple):
             bbox_result, segm_result = result
         else:
@@ -220,9 +220,18 @@ class BaseDetector(nn.Module):
                 for i, bbox in enumerate(bbox_result)
             ]
             labels = np.concatenate(labels)
-            mmcv.imshow_det_bboxes(
-                img_show,
-                bboxes,
-                labels,
-                class_names=class_names,
-                score_thr=score_thr)
+            if out_file=="":
+                mmcv.imshow_det_bboxes(
+                    img_show,
+                    bboxes,
+                    labels,
+                    class_names=class_names,
+                    score_thr=score_thr)
+            else:
+                mmcv.imshow_det_bboxes(
+                    img_show,
+                    bboxes,
+                    labels,
+                    class_names=class_names,
+                    score_thr=score_thr,
+                    out_file=out_file)
