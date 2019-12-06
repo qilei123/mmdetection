@@ -178,7 +178,7 @@ class BaseDetector(nn.Module):
                     score_thr=score_thr,
                     out_file=out_file)
             
-    def show_result(self, data, result, dataset=None, score_thr=0.3,out_file=""):
+    def show_result(self, data, result, dataset=None, score_thr=0.0,out_file=""):
         if isinstance(result, tuple):
             bbox_result, segm_result = result
         else:
