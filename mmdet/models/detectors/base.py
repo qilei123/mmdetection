@@ -188,7 +188,7 @@ class BaseDetector(nn.Module):
         img_metas = data['img_meta'][0].data[0]
         imgs = tensor2imgs(img_tensor, **img_metas[0]['img_norm_cfg'])
         assert len(imgs) == len(img_metas)
-
+        print(dataset)
         if dataset is None:
             class_names = self.CLASSES
         elif isinstance(dataset, str):
