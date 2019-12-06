@@ -80,7 +80,7 @@ test_pipeline = [
         transforms=[
             dict(type='Resize', keep_ratio=False),
             dict(type='Normalize', **img_norm_cfg),
-            dict(type='RandomFlip', flip_ratio=0.5,FLIP2=True,ROTATE4=True),
+            #dict(type='RandomFlip', flip_ratio=0.5,FLIP2=True,ROTATE4=True),
             dict(type='ImageToTensor', keys=['img']),
             dict(type='Collect', keys=['img']),
         ])
