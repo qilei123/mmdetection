@@ -33,7 +33,7 @@ def single_gpu_test(model, data_loader, show=False,save_folder = ""):
             filename = os.path.basename((data["img_meta"][0]).data[0][0]["filename"])
             out_file = os.path.join(save_folder,filename)
             #model.module.show_result(data, result,dataset=["line","ridge1","ridge2"],out_file=out_file,classify_records = classify_records)
-            model.module.show_result(data, result,out_file)
+            model.module.show_result(data, result,out_file,dataset=["volcano"])
         batch_size = data['img'][0].size(0)
         for _ in range(batch_size):
             prog_bar.update()
