@@ -23,7 +23,7 @@ def single_gpu_test(model, data_loader, show=False,save_folder = ""):
     prog_bar = mmcv.ProgressBar(len(dataset))
 
 
-    classify_records = open(os.path.join(save_folder,"classify_records.txt"),'w')
+    #classify_records = open(os.path.join(save_folder,"classify_records.txt"),'w')
 
     for i, data in enumerate(data_loader):
         with torch.no_grad():
