@@ -137,9 +137,9 @@ class BaseDetector(nn.Module):
             if segm_result is not None:
                 segms = mmcv.concat_list(segm_result)
                 
-                #inds = np.where(bboxes[:, -1] > score_thr)[0]
+                inds = np.where(bboxes[:, -1] > score_thr)[0]
                 
-                inds = np.where(bboxes[:, -1] >= max_score)[0]
+                #inds = np.where(bboxes[:, -1] >= max_score)[0]
                 bboxes = bboxes[inds, :]
                 for i in inds:
                     color_mask = np.random.randint(
